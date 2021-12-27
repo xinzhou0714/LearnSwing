@@ -10,7 +10,8 @@ public class Toolbar extends JPanel implements ActionListener {
 
 	private JButton helloButton;
 	private JButton goodbyeButton;
-	private TextPanel textPanel;
+
+	private StringListener textListener; //this interface could be any kind of class, that will be override anywhere else
 	
 	public Toolbar() {
 		helloButton = new JButton("Hello");
@@ -27,8 +28,8 @@ public class Toolbar extends JPanel implements ActionListener {
 	}
 	
 	
-	public void setTextPanel(TextPanel textPanel) {
-		this.textPanel = textPanel;
+	public void setStringListener(StringListener listener) {
+		this.textListener = listener;
 	}
 
 
@@ -39,12 +40,14 @@ public class Toolbar extends JPanel implements ActionListener {
 		JButton clicked =(JButton) e.getSource();
 		
 		if(clicked == helloButton ) {
-			//System.out.println("hello");
-			textPanel.appendText("Hello\n");
+			if (textListener != null) {
+				textListener.textEmitted("Hello\n");
+			}
 		}
 		else if (clicked == goodbyeButton){
-			//System.out.println("goodbye");
-			textPanel.appendText("Goodbye\n");
+			if (textListener != null) {
+				textListener.textEmitted("Goodbye\n");
+			}
 		}
 		
 	}

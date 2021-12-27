@@ -20,7 +20,14 @@ public class MainFrame extends JFrame {
 		textPanel = new TextPanel();
 		toolbar = new Toolbar();
 		
-		toolbar.setTextPanel(textPanel);
+		toolbar.setStringListener(new StringListener() {
+			
+			@Override
+			public void textEmitted(String text) {
+				textPanel.appendText(text);
+				
+			}
+		});
 		
 
 		
